@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 jobs:
   build-debian:
-    name: Build ${{ matrix.job.platform }}
+    name: Build ${{ matrix.job.os }} ${{ matrix.job.debian_arch }} - ${{ matrix.job.platform }}
     permissions:
       pull-requests: write
     runs-on: ubuntu-latest
@@ -16,10 +16,10 @@ jobs:
       fail-fast: false
       matrix:
         job:
-          - { platform: linux/arm/v5, debian_arch: armel }
-          - { platform: linux/arm/v7, debian_arch: armhf }
-          - { platform: linux/arm64, debian_arch: arm64 }
-          - { platform: linux/amd64, debian_arch: amd64 }
+          - { os: debian_bookworm, platform: linux/arm/v5, debian_arch: armel }
+          - { os: debian_bookworm, platform: linux/arm/v7, debian_arch: armhf }
+          - { os: debian_bookworm, platform: linux/arm64, debian_arch: arm64 }
+          - { os: debian_bookworm, platform: linux/amd64, debian_arch: amd64 }
 
     steps:
       - name: Checkout
@@ -41,5 +41,5 @@ jobs:
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
-          name: package-${{ matrix.job.debian_arch }}
+          name: package-${{ matrix.job.os }}-${{ matrix.job.debian_arch }}
           path: debian/dist/*
