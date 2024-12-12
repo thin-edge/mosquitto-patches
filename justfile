@@ -1,4 +1,5 @@
-IMAGE := "docker.io/library/debian:bookworm"
+IMAGE := "debian-12"
+IMAGE_FILE := IMAGE + ".dockerfile"
 PLATFORM := "linux/arm/v7"
 
 setup:
@@ -13,8 +14,8 @@ patch-debian:
     set -e
     cd debian
     mkdir -p dist/
-    docker buildx build --load --platform "{{PLATFORM}}" -t "debian-patch" --build-arg IMAGE={{IMAGE}} -f debian-bookworm.dockerfile .
-    docker run --platform "{{PLATFORM}}" --rm -v $(pwd)/patches:/patches -v $(pwd)/dist:/dist "debian-patch" patch.sh
+    docker buildx build --load --platform "{{PLATFORM}}" -t "{{IMAGE}}" -f "{{IMAGE_FILE}}" .
+    docker run --platform "{{PLATFORM}}" --rm -v $(pwd)/patches:/patches -v $(pwd)/dist:/dist -v $(pwd)/patch.sh:/usr/bin/patch.sh "{{IMAGE}}" patch.sh
 
 # patch all mosquitto packages
 patch-all:

@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 jobs:
   build-debian:
-    name: Build ${{ matrix.job.os }} ${{ matrix.job.debian_arch }} - ${{ matrix.job.platform }}
+    name: Build ${{ matrix.job.image }} ${{ matrix.job.debian_arch }} - ${{ matrix.job.platform }}
     permissions:
       pull-requests: write
     runs-on: ubuntu-latest
@@ -16,10 +16,25 @@ jobs:
       fail-fast: false
       matrix:
         job:
-          - { os: debian_bookworm, platform: linux/arm/v5, debian_arch: armel }
-          - { os: debian_bookworm, platform: linux/arm/v7, debian_arch: armhf }
-          - { os: debian_bookworm, platform: linux/arm64, debian_arch: arm64 }
-          - { os: debian_bookworm, platform: linux/amd64, debian_arch: amd64 }
+          - { image: debian-12, platform: linux/arm/v5, debian_arch: armel }
+          - { image: debian-12, platform: linux/arm/v7, debian_arch: armhf }
+          - { image: debian-12, platform: linux/arm64, debian_arch: arm64 }
+          - { image: debian-12, platform: linux/amd64, debian_arch: amd64 }
+
+          - { image: debian-13, platform: linux/arm/v5, debian_arch: armel }
+          - { image: debian-13, platform: linux/arm/v7, debian_arch: armhf }
+          - { image: debian-13, platform: linux/arm64, debian_arch: arm64 }
+          - { image: debian-13, platform: linux/amd64, debian_arch: amd64 }
+
+          - { image: ubuntu-24.04, platform: linux/arm/v5, debian_arch: armel }
+          - { image: ubuntu-24.04, platform: linux/arm/v7, debian_arch: armhf }
+          - { image: ubuntu-24.04, platform: linux/arm64, debian_arch: arm64 }
+          - { image: ubuntu-24.04, platform: linux/amd64, debian_arch: amd64 }
+
+          - { image: ubuntu-25.04, platform: linux/arm/v5, debian_arch: armel }
+          - { image: ubuntu-25.04, platform: linux/arm/v7, debian_arch: armhf }
+          - { image: ubuntu-25.04, platform: linux/arm64, debian_arch: arm64 }
+          - { image: ubuntu-25.04, platform: linux/amd64, debian_arch: amd64 }
 
     steps:
       - name: Checkout
@@ -36,10 +51,10 @@ jobs:
       - uses: taiki-e/install-action@just
 
       - name: Patch
-        run: just PLATFORM=${{ matrix.job.platform }} patch-debian
+        run: just IMAGE=${{ matrix.job.image }} PLATFORM=${{ matrix.job.platform }} patch-debian
 
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
-          name: package-${{ matrix.job.os }}-${{ matrix.job.debian_arch }}
+          name: ${{ matrix.job.image }}-${{ matrix.job.debian_arch }}
           path: debian/dist/*
