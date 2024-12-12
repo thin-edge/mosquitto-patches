@@ -1,0 +1,29 @@
+From 14b62f3f35d1b8a6e17820a31280fb27553396b5 Mon Sep 17 00:00:00 2001
+From: reubenmiller <reuben.d.miller@gmail.com>
+Date: Tue, 10 Dec 2024 18:04:41 +0100
+Subject: [PATCH 1/1] fix: session handling when per_listener_settings is set
+ to true
+
+Suggestion from https://github.com/eclipse-mosquitto/mosquitto/issues/2618#issuecomment-2208677071
+---
+ lib/net_mosq.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/lib/net_mosq.c b/lib/net_mosq.c
+index fb0c7ac8..c12eed47 100644
+--- a/lib/net_mosq.c
++++ b/lib/net_mosq.c
+@@ -248,9 +248,8 @@ int net__socket_close(struct mosquitto *mosq)
+ 	}
+ 
+ #ifdef WITH_BROKER
+-	if(mosq->listener){
++	if(mosq->listener && mosq->state != mosq_cs_duplicate && mosq->state != mosq_cs_disused){
+ 		mosq->listener->client_count--;
+-		mosq->listener = NULL;
+ 	}
+ #endif
+ 
+-- 
+2.39.5 (Apple Git-154)
+
