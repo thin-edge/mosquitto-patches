@@ -18,6 +18,8 @@ jobs:
         job:
           - { platform: linux/arm/v5 }
           - { platform: linux/arm/v7 }
+          - { platform: linux/arm64 }
+          - { platform: linux/amd64 }
 
     steps:
       - name: Checkout
