@@ -14,7 +14,7 @@ patch-debian:
     cd debian
     mkdir -p dist/
     docker buildx build --load --platform "{{PLATFORM}}" -t "debian-patch" --build-arg IMAGE={{IMAGE}} -f debian-bookworm.dockerfile .
-    docker run --platform "{{PLATFORM}}" --rm -it -v $(pwd)/patches:/patches -v $(pwd)/dist:/dist "debian-patch" patch.sh
+    docker run --platform "{{PLATFORM}}" --rm -v $(pwd)/patches:/patches -v $(pwd)/dist:/dist "debian-patch" patch.sh
 
 # patch all mosquitto packages
 patch-all:
