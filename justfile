@@ -1,3 +1,5 @@
+set dotenv-load
+
 IMAGE := "debian-12"
 IMAGE_FILE := IMAGE + ".dockerfile"
 PLATFORM := "linux/arm/v7"
@@ -11,6 +13,10 @@ patch-debian:
     #!/usr/bin/env bash
     set -e
     cd debian
-    mkdir -p dist/
+    mkdir -p "dist/{{IMAGE}}"
     docker buildx build --load --platform "{{PLATFORM}}" -t "{{IMAGE}}" -f "{{IMAGE_FILE}}" .
-    docker run --platform "{{PLATFORM}}" --rm -v $(pwd)/patches:/patches -v $(pwd)/dist:/dist -v $(pwd)/patch.sh:/usr/bin/patch.sh "{{IMAGE}}" patch.sh
+    docker run --platform "{{PLATFORM}}" --rm -v $(pwd)/patches:/patches -v $(pwd)/dist/{{IMAGE}}:/dist -v $(pwd)/patch.sh:/usr/bin/patch.sh "{{IMAGE}}" patch.sh
+
+# publish debian packages to linux repo
+publish-debian:
+    ./ci/publish.sh --path debian/dist
