@@ -137,9 +137,20 @@ publish() {
     done
 }
 
-# debian
-publish "$SOURCE_PATH/debian-12" "*.deb" deb "debian" "bookworm" "backports"
-publish "$SOURCE_PATH/debian-13" "*.deb" deb "debian" "trixie" "backports"
+# debian-12 bookworm
+publish "$SOURCE_PATH/debian-12-amd64" "*.deb" deb "debian" "bookworm" "backports"
+publish "$SOURCE_PATH/debian-12-arm64" "*.deb" deb "debian" "bookworm" "backports"
+publish "$SOURCE_PATH/debian-12-armel" "*.deb" deb "debian" "bookworm" "backports"
+publish "$SOURCE_PATH/debian-12-armhf" "*.deb" deb "debian" "bookworm" "backports"
+
+# debian-13 trixie
+publish "$SOURCE_PATH/debian-13-amd64" "*.deb" deb "debian" "trixie" "backports"
+publish "$SOURCE_PATH/debian-13-arm64" "*.deb" deb "debian" "trixie" "backports"
+publish "$SOURCE_PATH/debian-13-armel" "*.deb" deb "debian" "trixie" "backports"
+publish "$SOURCE_PATH/debian-13-armhf" "*.deb" deb "debian" "trixie" "backports"
+
 
 # ubuntu
-publish "$SOURCE_PATH/ubuntu-24.04" "*.deb" deb "ubuntu" "noble" "backports"     # 24.04
+publish "$SOURCE_PATH/ubuntu-24.04-amd64" "*.deb" deb "ubuntu" "noble" "backports"     # 24.04
+publish "$SOURCE_PATH/ubuntu-24.04-arm64" "*.deb" deb "ubuntu" "noble" "backports"     # 24.04
+publish "$SOURCE_PATH/ubuntu-24.04-armhf" "*.deb" deb "ubuntu" "noble" "backports"     # 24.04

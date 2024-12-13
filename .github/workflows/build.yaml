@@ -80,5 +80,5 @@ jobs:
         env:
           PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
         run: |
-          ls -l debian/dist/
+          ls -l debian/dist/*
           ./ci/publish.sh --path ./debian/dist
