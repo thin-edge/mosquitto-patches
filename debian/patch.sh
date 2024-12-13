@@ -31,7 +31,7 @@ patch_mosquitto() {
     ls -l ../*.deb
 
     mkdir -p /dist
-    cp "../${PACKAGE}"_*.deb /dist/
+    cp ../*.deb /dist/
 }
 
 patch_mosquitto
