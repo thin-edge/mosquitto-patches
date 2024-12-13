@@ -138,19 +138,19 @@ publish() {
 }
 
 # debian-12 bookworm
-publish "$SOURCE_PATH/debian-12-amd64" "*.deb" deb "debian" "bookworm" "backports"
-publish "$SOURCE_PATH/debian-12-arm64" "*.deb" deb "debian" "bookworm" "backports"
-publish "$SOURCE_PATH/debian-12-armel" "*.deb" deb "debian" "bookworm" "backports"
-publish "$SOURCE_PATH/debian-12-armhf" "*.deb" deb "debian" "bookworm" "backports"
+publish "$SOURCE_PATH/debian-12-amd64" "*.deb" deb "debian" "bookworm" "tedge-updates"
+publish "$SOURCE_PATH/debian-12-arm64" "*.deb" deb "debian" "bookworm" "tedge-updates"
+publish "$SOURCE_PATH/debian-12-armel" "*.deb" deb "debian" "bookworm" "tedge-updates"
+publish "$SOURCE_PATH/debian-12-armhf" "*.deb" deb "debian" "bookworm" "tedge-updates"
 
 # debian-13 trixie
-publish "$SOURCE_PATH/debian-13-amd64" "*.deb" deb "debian" "trixie" "backports"
-publish "$SOURCE_PATH/debian-13-arm64" "*.deb" deb "debian" "trixie" "backports"
-publish "$SOURCE_PATH/debian-13-armel" "*.deb" deb "debian" "trixie" "backports"
-publish "$SOURCE_PATH/debian-13-armhf" "*.deb" deb "debian" "trixie" "backports"
+publish "$SOURCE_PATH/debian-13-amd64" "*.deb" deb "debian" "trixie" "tedge-updates"
+publish "$SOURCE_PATH/debian-13-arm64" "*.deb" deb "debian" "trixie" "tedge-updates"
+publish "$SOURCE_PATH/debian-13-armel" "*.deb" deb "debian" "trixie" "tedge-updates"
+publish "$SOURCE_PATH/debian-13-armhf" "*.deb" deb "debian" "trixie" "tedge-updates"
 
 
 # ubuntu
-publish "$SOURCE_PATH/ubuntu-24.04-amd64" "*.deb" deb "ubuntu" "noble" "backports"     # 24.04
-publish "$SOURCE_PATH/ubuntu-24.04-arm64" "*.deb" deb "ubuntu" "noble" "backports"     # 24.04
-publish "$SOURCE_PATH/ubuntu-24.04-armhf" "*.deb" deb "ubuntu" "noble" "backports"     # 24.04
+publish "$SOURCE_PATH/ubuntu-24.04-amd64" "*.deb" deb "ubuntu" "noble" "tedge-updates"     # 24.04
+publish "$SOURCE_PATH/ubuntu-24.04-arm64" "*.deb" deb "ubuntu" "noble" "tedge-updates"     # 24.04
+publish "$SOURCE_PATH/ubuntu-24.04-armhf" "*.deb" deb "ubuntu" "noble" "tedge-updates"     # 24.04
